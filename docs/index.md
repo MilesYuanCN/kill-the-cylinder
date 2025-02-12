@@ -1,25 +1,4 @@
----
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
-
-hero:
-  name: "Kill-The-Cylinder"
-  text: "Kill-The-Cylinder"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Learn RL From DeepSeek
-      link: /Learn_RL_From_DeepSeek_0
-    - theme: alt
-      text: API Examples
-      link: /api-examples
-
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
----
-
+<div style="text-align: center">
+  <h1 style="font-size: 3em; color: #3498db; margin-bottom: 1em; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Kill-The-Cylinder</h1>
+  <img src="./images/image.png" alt="Kill-The-Cylinder" style="max-width: 800px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
