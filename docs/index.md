@@ -8,8 +8,8 @@ hero:
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /Learn_RL_From_DeepSeek.md
+      text: Learn RL From DeepSeek
+      link: /Learn_RL_From_DeepSeek_0
     - theme: alt
       text: API Examples
       link: /api-examples
