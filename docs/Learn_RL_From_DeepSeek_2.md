@@ -1,3 +1,10 @@
+# 跟着 DS 学习 RL（二）：经典算法分类与基本算法
+
+友链：
+*   [跟着 DS 学习 ReinforcementLearning](./Learn_RL_From_DeepSeek_0.md)
+*   [跟着 DS 学习 RL（一）：核心概念](./Learn_RL_From_DeepSeek_1.md)
+*   [跟着 DS 学习 RL（三）：PPO & GRPO](./Learn_RL_From_DeepSeek_3.md)
+
 > ### **阶段2：经典算法分类（3-4小时）**
 > 
 > *   **目标**：区分基于价值、基于策略的算法
@@ -29,12 +36,12 @@
 > #### **1\. Q-Learning核心原理**
 > 
 > *   **核心公式**：  
->     ( Q(s\_t,a\_t) \\leftarrow Q(s\_t,a\_t) + \\alpha \[r\_{t+1} + \\gamma \\max\_a Q(s\_{t+1},a) - Q(s\_t,a\_t)\] )
-> *   **关键特性**：
->     *   表格法（Tabular）：适用于离散小状态空间
->     *   无模型（Model-Free）：无需环境动力学
+    $Q(s_t,a_t) \leftarrow Q(s_t,a_t) + \alpha [r_{t+1} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)]$
+*   **关键特性**：
+    *   表格法（Tabular）：适用于离散小状态空间
+    *   无模型（Model-Free）：无需环境动力学
 > *   **动态演示**：  
->     [Q-Learning迷宫寻宝交互演示](https://www.ra.cs.uni-tuebingen.de/mitarbeiter/milicak/Q-learning/)
+    [Q-Learning迷宫寻宝交互演示](https://www.ra.cs.uni-tuebingen.de/mitarbeiter/milicak/Q-learning/)
 > 
 > #### **2\. DQN的革新**
 > 
@@ -43,7 +50,7 @@
 >     2.  **目标网络（Target Network）**：稳定训练
 >     3.  **神经网络拟合Q函数**：处理高维状态
 > *   **架构图**：  
->     ![DQN Architecture](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/1_HMu8J2zHG-C6oVjYII-Eqg.png)
+>     ![DQN Architecture](./images/1_HMu8J2zHG-C6oVjYII-Eqg.png)
 > *   **关键论文**：  
 >     [Nature DQN论文图表解读](https://www.nature.com/articles/nature14236/figures/1)（重点看图1）
 > 
@@ -72,11 +79,11 @@
 > #### **1\. 策略梯度定理**
 > 
 > *   **目标函数**：  
->     ( J(\\theta) = \\mathbb{E}_{\\pi_\\theta}\[\\sum \\gamma^t r\_t\] )
-> *   **梯度公式**：  
->     ( \\nabla\_\\theta J(\\theta) = \\mathbb{E}\[\\sum \\nabla\_\\theta \\log \\pi\_\\theta(a|s) Q^\\pi(s,a)\] )
-> *   **直观解释**：  
->     [Policy Gradient的梯度上升可视化](https://imgur.com/a/PolicyGradientGIF)
+    $J(\theta) = \mathbb{E}_{\pi_\theta}[\sum \gamma^t r_t]$
+*   **梯度公式**：  
+    $\nabla_\theta J(\theta) = \mathbb{E}[\sum \nabla_\theta \log \pi_\theta(a|s) Q^\pi(s,a)]$
+*   **直观解释**：  
+    [Policy Gradient的梯度上升可视化](https://imgur.com/a/PolicyGradientGIF)
 > 
 > #### **2\. REINFORCE算法**
 > 
@@ -95,49 +102,30 @@
 > 
 > *   **与DQN的差异**：
 >     
->     特性
->     
->     DQN
->     
->     Policy Gradient
->     
->     输出维度
->     
->     每个动作的Q值
->     
->     动作概率分布
->     
->     探索方式
->     
->     ε-greedy
->     
->     策略的随机性
->     
->     连续动作支持
->     
->     需离散化
->     
->     直接支持
->     
-> 
+>     | 特性 | DQN | Policy Gradient |
+>     |------|-----|-----------------|
+>     | 输出维度 | 每个动作的Q值 | 动作概率分布 |
+>     | 探索方式 | ε-greedy | 策略的随机性 |
+>     | 连续动作支持 | 需离散化 | 直接支持 |
+>
 > * * *
 > 
 > ### **三、Actor-Critic框架 (1小时)**
 > 
 > #### **1\. 两模块架构**
 > 
-> *   **Actor**：策略网络 ( \\pi\_\\theta(a|s) ) → 生成动作
-> *   **Critic**：价值网络 ( V\_\\phi(s) ) 或 ( Q\_\\phi(s,a) ) → 评估动作
+> *   **Actor**：策略网络 $\pi_\theta(a|s)$ → 生成动作
+> *   **Critic**：价值网络 $V_\phi(s)$ 或 $Q_\phi(s,a)$ → 评估动作
 > *   **结构示意图**：  
->     ![Actor-Critic](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/3707a5c06fe28b0c2660e70c46cce5bfd84dac90.svg)
+>     ![Actor-Critic](./images/3707a5c06fe28b0c2660e70c46cce5bfd84dac90.svg)
 > 
 > #### **2\. 优势函数（Advantage）**
 > 
 > *   **定义**：  
->     ( A(s,a) = Q(s,a) - V(s) )  
->     （衡量特定动作相对于平均水平的优势）
-> *   **计算技巧**：  
->     TD误差 ( \\delta = r + \\gamma V(s') - V(s) ) 作为优势估计
+    $A(s,a) = Q(s,a) - V(s)$  
+    （衡量特定动作相对于平均水平的优势）
+*   **计算技巧**：  
+    TD误差 $\delta = r + \gamma V(s') - V(s)$ 作为优势估计
 > 
 > #### **3\. 经典变体**
 > 
@@ -163,48 +151,15 @@
 > 
 > #### **性能对比表**
 > 
-> 指标
-> 
-> DQN
-> 
-> Policy Gradient
-> 
-> Actor-Critic
-> 
-> 样本效率
-> 
-> 中
-> 
-> 低
-> 
-> 高
-> 
-> 训练稳定性
-> 
-> 需目标网络
-> 
-> 高方差
-> 
-> 中等
-> 
-> 连续动作支持
-> 
-> 不支持
-> 
-> 支持
-> 
-> 支持
-> 
-> 并行化能力
-> 
-> 难
-> 
-> 中等
-> 
-> 易（A3C）
-> 
+> | 指标 | DQN | Policy Gradient | Actor-Critic |
+> |------|-----|-----------------|--------------|
+> | 样本效率 | 中 | 低 | 高 |
+> | 训练稳定性 | 需目标网络 | 高方差 | 中等 |
+> | 连续动作支持 | 不支持 | 支持 | 支持 |
+> | 并行化能力 | 难 | 中等 | 易（A3C） |
+>
 > * * *
-> 
+>
 > ### **精选学习资源**
 > 
 > 1.  **视频课程**：
@@ -234,17 +189,14 @@
 
 先跟着 Openai 文档看下。
 
-RL 算法种类分类
-=========
-
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_12-42-37.png)
+## RL 算法种类分类
+![](./images/image-2025-2-8_12-42-37.png)
 
 现代 RL 算法不是能用树结构很好分类的。 但是为了便于理解， 减少了一些内容。
 
 以下是一些关键的「branching point」分支节点（分类维度）
 
-Model-Free vs Model-Based RL
-----------------------------
+### Model-Free vs Model-Based RL
 
 主要区别是， Agent 是否可以访问（或者学习）一个模型的环境。
 
@@ -254,12 +206,12 @@ Model-Free vs Model-Based RL
 
 模型的学习是客观困难的， 即使耗费很多的时间和计算资源有时也难以搞定。
 
-Model-Based RL：
+#### Model-Based RL：
 
 *   使用模型的 RL
 *   效率潜在提高（有更多信息）
 
-Model-Free RL：
+#### Model-Free RL：
 
 *   放弃了使用模型
 *   更易于实现和调整
@@ -267,8 +219,7 @@ Model-Free RL：
 
   
 
-What to Learn 要学习什么
--------------------
+### What to Learn 要学习什么
 
 *   策略：随机的还是固定的
 *   action-value functions：动作价值函数
@@ -281,7 +232,7 @@ What to Learn 要学习什么
 
 *   Policy Optimization：
     *   策略优化， 优化策略中的参数 /theta。  
-        ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_18-54-21.png)
+        ![](./images/image-2025-2-8_18-54-21.png)
     *   直接通过价值函数来梯度下降，或者简介的最大化局部价值函数 J()。
     *   因而， 这种优化基本上都是 on-policy （同策略）来执行。
     *   一些例子：
@@ -339,16 +290,15 @@ What to Learn 要学习什么
 
   
 
-Q-Learning
-==========
+## Q-Learning
 
 看 huggingface 里面有比较详细的文档。 照着 huggingface 来学习。
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_19-45-35.png)
+![](./images/image-2025-2-8_19-45-35.png)
 
 前面的 bellman 方程和四种价值函数里面， 我们知道了以下
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_19-48-45.png)
+![](./images/image-2025-2-8_19-48-45.png)
 
 当前状态的价值是， 当前 Agent 在当前 State 开始的 discounted return, 然后根据 policy 进行行动得到的价值。
 
@@ -361,22 +311,19 @@ Q-Learning
 
 有两个重要的函数：
 
-### State-value function
+#### State-value function
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-15-18.png)
+![](./images/image-2025-2-8_20-15-18.png)
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-15-24.png)
+![](./images/image-2025-2-8_20-15-24.png)
 
 按照 bellman 方程来说， 这个是可以应用动态规划的
 
-  
+#### Action-value function
 
-Action-value function
+![](./images/image-2025-2-8_20-17-28.png)
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-17-28.png)
-
-蒙特卡洛（Monte Carlo）和时间差异学习
-------------------------
+### 蒙特卡洛（Monte Carlo）和时间差异学习
 
 都是训练我们的价值函数或者我们的策略函数的。 他们都是基于「经验」来解决 RL 问题的方法。
 
@@ -385,26 +332,25 @@ Action-value function
 *   蒙特卡洛：使用了整个经验
 *   时间差：仅使用一步经验**(St,At,Rt+1,St+1St​,At​,Rt+1​,St+1​ )**
 
-### **蒙特卡洛：learn at the end of the episode**
+#### **蒙特卡洛：learn at the end of the episode**
 
 **蒙特卡洛在整个 episode 结束后， 使用其 Return 用作更新**
 
-**![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-44-51.png)**
+**![](./images/image-2025-2-8_20-44-51.png)**
 
-**对于起始位置的价值来说：![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-48-30.png)**
+**对于起始位置的价值来说：![](./images/image-2025-2-8_20-48-30.png)**
 
-### **时间差异学习：learn at each step**
+#### **时间差异学习：learn at each step**
 
 **也被称为 TD 学习。**
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_20-54-57.png)
+![](./images/image-2025-2-8_20-54-57.png)
 
 直接用 Rt+1 来计算整体趋势。
 
   
 
-Q-Learning
-----------
+### Q-Learning
 
 是一种： **off-policy value-based method that uses a TD approach to train its action-value function：非严格遵循策略（off-policy）的， 基于时间差异的，来训练「状态价值」函数的价值函数方法**
 
@@ -414,12 +360,9 @@ Q-Learning
 
 **开始后的时候都是 0 ， 之后在 episode 中， 每个 step 对齐进行更新。**
 
-  
+#### Q-Learning Algorithm
 
-**Q-Learning Algorithm**
-------------------------
-
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-8_21-17-54.png)
+![](./images/image-2025-2-8_21-17-54.png)
 
 其实就是我们想象的那样，不过添加了一些细节：
 
@@ -429,24 +372,19 @@ Q-Learning
 *   更新 Q(t)
 *   直到一个 episode 结束， 重复下一个 episode
 
-  
-
-  
-
 (到此为止 2h40min 左右)
 
-DQN
----
+## DQN
 
 对上面的 Q-Learning Algorithm 来说， 可以完成一些 discrete and small（离散并且小规模）的任务（比如 FronzenLake-v1）， 对于 Atari games（应该是太空大战)，里面有 10^9 ~ 10^11 的状态。
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-9_10-38-43.png)
+![](./images/image-2025-2-9_10-38-43.png)
 
 在大型状态空间环境中， Q-Table 的空间复杂度就比较大了， (因为其是 O(S \* A)）的。
 
 [RL-ZOO](https://github.com/DLR-RM/rl-baselines3-zoo)，一个工具
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-9_10-47-28.png)
+![](./images/image-2025-2-9_10-47-28.png)
 
 *   input：四帧画面
     *   预处理输入（降低状态的复杂度）
@@ -458,14 +396,14 @@ DQN
 
 对于 Q 的更新， 无法直接应用于 Q-Table，在 DQN 里面， 创建了一个损失函数：**该函数比较了我们的预测的 Q-Value 和实际的 Q 值 Q-Target ， 并且使用梯度下降来更新 QN 来让我们更好的预测**
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-9_11-0-1.png)
+![](./images/image-2025-2-9_11-0-1.png)
 
 The Deep Q-Learning training algorithm 有两个阶段：
 
 *   Sampling（采样）：执行动作并将其观察值（经验）的 tuples 放在一个「replay memory」中
 *   Training（训练）：「随机」选择一小部分 tuples， 梯度下降更新这些东西
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-9_11-5-56.png)
+![](./images/image-2025-2-9_11-5-56.png)
 
 DNP 可能会遭受不稳定性的困扰（感觉是因为每个 step 更改 Q-Table 不会影响下一个 step），但是更新神经网络会影响所有情况的输出。
 
@@ -506,8 +444,7 @@ DNP 可能会遭受不稳定性的困扰（感觉是因为每个 step 更改 Q-T
 
 （到这里近 4h）
 
-策略优化
-----
+## 策略优化
 
 DS 没给出直接的资料， 但是看起来 [openai spinning up](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html) 里面有相关章节（换着学）
 
@@ -526,30 +463,30 @@ the theory of policy gradients 的三个关键结果：
 
 要使用梯度上升法优化回放函数， 就需要计算出其对应的梯度：
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-30-34.png)
+![](./images/image-2025-2-10_9-30-34.png)
 
 一些对于分析梯度重要的 Fact
 
 *   Probability of a Trajectory：轨迹的概率  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-31-23.png)  
+    ![](./images/image-2025-2-10_9-31-23.png)  
     *   （这里没懂， P 不是自然法则吗， 最终算出来的应该是 ST 才对吧）（可能这里是 at 从 st → st+1 的概率（合理））
     *   所以等式左侧， 代表的是此轨迹以及参数的概率
 *   The Log-Derivative Trick：对数导数 Trick  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-38-32.png)  
+    ![](./images/image-2025-2-10_9-38-32.png)  
     *   微积分的简单规则：对于 x 来说， log x 的导数可以认为是 1/x（好像翻译的不对， 反正看公式带入就行， 数学原理暂时不用深究）
 *   Log-Probability of a Trajectory：轨迹的对数概率  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-50-53.png)
+    ![](./images/image-2025-2-10_9-50-53.png)
 *   Gradients of Environment Functions：环境函数的梯度，由于其中没有参数 /theta， 所以都为 0
 *   Grad-Log-Prob of a Trajectory：因此轨迹的对数-Prob  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-53-0.png)
+    ![](./images/image-2025-2-10_9-53-0.png)
 *   因此得到以下内容， 对于回报函数的积分就是：
-    *   ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_9-53-9.png)
+    *   ![](./images/image-2025-2-10_9-53-9.png)
     *   这里终于理解了数学期望和里面的概率。
     *   所以最终梯度又变为了一个数学期望。
 
 因为是数学期望， 所以可以用样本平均值来估算：
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_10-1-43.png)
+![](./images/image-2025-2-10_10-1-43.png)
 
 收集一波轨迹， 然后计算其具体概率和奖励， 之后取平均， 就得到了我们想要的梯度。
 
@@ -563,7 +500,7 @@ the theory of policy gradients 的三个关键结果：
 
 期望梯度 Log-Prob 引理
 
-![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_18-42-0.png)
+![](./images/image-2025-2-10_18-42-0.png)
 
 假设 Ptheta 是变量为 x 时的参数化概率分布。
 
@@ -575,14 +512,13 @@ the theory of policy gradients 的三个关键结果：
 
 *   实际影响 return 的， 是执行 action 之后的 return， 而不是之前的。
 *   所以在计算损失的时候用， 越往前的， 权重要加上后面的（好像是这个意思？）
-*   ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_18-56-56.png)
+*   ![](./images/image-2025-2-10_18-56-56.png)
 
   
 
 （5h）
 
-Actor-Critic 框架：
-================
+## Actor-Critic 框架
 
 [https://huggingface.co/learn/deep-rl-course/unit6/introduction](https://huggingface.co/learn/deep-rl-course/unit6/introduction)，又回到 huggingface。 总体感觉 huggingface 的曲线更加柔和。
 
@@ -619,14 +555,14 @@ Actor-Critic 是一种结合「Value」和「Policy」的方法，减少方差�
 *   Critic 使用此 State 以及 Action 计算出来 Q 值
 *   执行 Action，得到 State(t+1) 和 R(t+1)
 *   Actor 使用 Critic 已经给出的 Q 值更新其 Policy  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_19-39-56.png)  
+    ![](./images/image-2025-2-10_19-39-56.png)  
     *   问题是， 这里更新该怎么更新啊？ 对于这个对数的求导值怎么得到。 而且含义是啥呢
 *   Actor（更新后的） 给出 State(t+1) 对应 Action(t+1) 
 *   Critic 更新其 value parameters  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_19-41-4.png)
+    ![](./images/image-2025-2-10_19-41-4.png)
     *   （文档没解释清楚）问了下 DS：Critic 的更新的目标是：  
         *   最小化 TD Error 来进行更新（评论家说的没错）
-        *   ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_19-47-55.png)
+        *   ![](./images/image-2025-2-10_19-47-55.png)
 
 ### Adding Advantage ：
 
@@ -635,6 +571,6 @@ Actor-Critic 是一种结合「Value」和「Policy」的方法，减少方差�
 优势函数的概念：
 
 *   选择当前行动， 相比于其他行动好多少。  
-    ![](./跟着 DS 学习 RL（二）经典算法分类与基本算法 - 原禄城 - Confluence_files/image-2025-2-10_20-7-31.png)
+    ![](./images/image-2025-2-10_20-7-31.png)
 
 我们可以用 TD 误差， 来估计「优势函数」搞的好不好。

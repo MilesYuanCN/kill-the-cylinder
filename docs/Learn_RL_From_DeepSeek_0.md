@@ -1,5 +1,6 @@
-简介
-==
+# 跟着 DS 学习 ReinforcementLearning
+
+## 简介
 
 因为看 Deepseek 的论文， 看到强化学习（RL）的部分就看不懂了， 目标是学习以下内容：
 
@@ -11,37 +12,36 @@
 
   
 
-整体学习还算顺畅， 大体上述问题大体得到了答案， 因为时间有限， 部分细节推导没有全部进行， 也没有 Coding 的过程， 后续有时间可以补上。
+整体学习还算顺畅， 大致用了 15h 左右。大体上述问题大体得到了答案， 因为时间有限， 部分细节推导没有全部进行， 也没有 Coding 的过程， 后续有时间可以补上。
 
-大体流程是：
+**大体流程**是：
 
 *   交代背景 DS 给出大纲及参考资料。
 *   学习途中如果具体内容没理解或对大纲有疑问， 再问 DS。
 *   配合上「[沉浸式翻译插件](https://app.immersivetranslate.com/)」增加阅读效率。
 
-整体体验来说：
+**整体体验**来说：
 
-*   不知道是不是由于滤镜， Deepseek 的答案相比于 4o，让人更加可信服。 体感其会从真正需求点出发， 深层次回答的感觉。（也可能是深度思考思维链的作用）
+*   不知道是不是由于滤镜， Deepseek 的答案相比于 4o，读起来可信度更加高一些。 体感其会从真正需求点出发， 深层次回答的感觉。（也可能是深度思考思维链的作用）
 *   但是还有一些问题存在：
     *   在整体 token 数量较大的时候， 和其他模型一样存在遗忘或者混淆的情况。
     *   给出的资料链接常常 404。
     *   模型的固有问题， 新知识不了解，GRPO 它就不知道是什么， 只能看论文。
 
-也总结了一些建议的学习路径：
+也总结了一些建议的**学习路径**：
 
 *   如果想同样的简要了解， 可以按照 DS 给的大纲以及本文的路线进行。 （如果想了解一些机器学习基础， [Andrew NG 的 Coursa](https://www.coursera.org/specializations/machine-learning-introduction) 不容错过）
 *   如果想学习 RL， 并真正将其用于工作生活中：
     *   直接 [Huggingface Deel RL Course](https://huggingface.co/learn/deep-rl-course/unit0/introduction) 的 Unit0 - Unit8
     *   [GRPO 原始论文](https://arxiv.org/abs/2402.03300)
 
-学习笔记：
+**学习笔记**：
 
-*   [跟着 DS 学习 RL（一）核心概念](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=801826870)
-*   [跟着 DS 学习 RL（二）经典算法分类与基本算法](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=801827765)
-*   [跟着 DS 学习 RL（三）PPO & GRPO](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=811939487)
+*   [跟着 DS 学习 RL（一）核心概念](./Learn_RL_From_DeepSeek_1.md)
+*   [跟着 DS 学习 RL（二）经典算法分类与基本算法](./Learn_RL_From_DeepSeek_2.md)
+*   [跟着 DS 学习 RL（三）PPO & GRPO](./Learn_RL_From_DeepSeek_3.md)
 
-DS 提供学习大纲
-=========
+## DS 提供学习大纲
 
 > 提问：
 > 
@@ -94,8 +94,8 @@ DS 提供学习大纲
     2.  **高方差问题**：引入Baseline（如Advantage Function）
     3.  **TRPO（信任域策略优化）**：核心思想（限制策略更新幅度）
 *   **关键公式**：
-    *   策略梯度：( \\nabla J(\\theta) = \\mathbb{E}\[\\nabla \\log \\pi\_\\theta(a|s) \\cdot A(s,a)\] )
-    *   Advantage Function：( A(s,a) = Q(s,a) - V(s) )
+    *   策略梯度：$\nabla J(\theta) = \mathbb{E}[\nabla \log \pi_\theta(a|s) \cdot A(s,a)]$
+    *   Advantage Function：$A(s,a) = Q(s,a) - V(s)$
 *   **学习资源**：
     *   论文：[TRPO原始论文（仅读Introduction）](https://arxiv.org/abs/1502.05477)
     *   图解：[TRPO vs PPO对比](https://imgur.com/a/7M7hB7Z)
@@ -107,9 +107,13 @@ DS 提供学习大纲
 *   **目标**：掌握PPO的核心思想和实现
 *   **关键内容**：
     1.  **PPO解决的问题**：TRPO计算复杂 → 用Clip替代约束
-    2.  **目标函数设计**：概率比裁剪 ( L^{CLIP}(\\theta) )
+    2.  **目标函数设计**：概率比裁剪 ( $L^{CLIP}(\theta)$ )
     3.  **重要性采样**：复用旧策略数据
-*   **公式核心**： \[ L^{CLIP} = \\mathbb{E}\\left\[ \\min\\left( r(\\theta) A, \\text{clip}(r(\\theta), 1-\\epsilon, 1+\\epsilon) A \\right) \\right\] \] （( r(\\theta) = \\frac{\\pi\_\\theta(a|s)}{\\pi\_{\\theta\_{\\text{old}}}(a|s)} )）
+*   **公式核心**：
+    $$
+    L^{CLIP} = \mathbb{E}\left[ \min\left( r(\theta) A, \text{clip}(r(\theta), 1-\epsilon, 1+\epsilon) A \right) \right]
+    $$
+    其中 $r(\theta) = \frac{\pi_\theta(a|s)}{\pi_{\theta_{\text{old}}}(a|s)}$
 *   **学习资源**：
     *   论文：[PPO原始论文（重点读Section 3）](https://arxiv.org/abs/1707.06347)
     *   代码：[PPO伪代码解读](https://spinningup.openai.com/en/latest/algorithms/ppo.html)
@@ -156,12 +160,11 @@ DS 提供学习大纲
 
   
 
-重点总结：
-=====
+## 主要知识点总结
 
 主要分为三部分进行学习：
 
-*   [跟着 DS 学习 RL（一）核心概念](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=801826870)
+*   [跟着 DS 学习 RL（一）核心概念](./Learn_RL_From_DeepSeek_1.md)
     *   RL 基本术语：
         *   Agent，Envoronment，State and Observations，Trajectories（轨迹），
         *   Action Spaces（动作空间）：连续， 非连续
@@ -177,7 +180,7 @@ DS 提供学习大纲
     *   探索与利用的平衡（Exploration vs. Exploitation）：
         *   什么时候去新饭店， 什么时候吃老饭店 
         *   ε-greedy & UCB
-*   [跟着 DS 学习 RL（二）经典算法分类与基本算法](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=801827765)（包含了阶段2和阶段3的一部分）
+*   [跟着 DS 学习 RL（二）经典算法分类与基本算法](./Learn_RL_From_DeepSeek_2.md)（包含了阶段2和阶段3的一部分）
     *   算法基础分类：
         *   按照是否感知环境：
             *   Model-Free：本次学习主要讨论的
@@ -211,7 +214,7 @@ DS 提供学习大纲
             *   在 A2C (Advantage Actor Critic） 中， 两者都是神经网络， 不过 Critic 用的是有事函数， 而不是神经网络
             *   Actor 通过 Critic 的反馈来梯度下降
             *   Critic 通过 TD 误差， 来证明评论的好不好
-*   [跟着 DS 学习 RL（三）PPO & GRPO](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=811939487)（阶段4和阶段5）
+*   [跟着 DS 学习 RL（三）PPO & GRPO](./Learn_RL_From_DeepSeek_3.md)（阶段4和阶段5）
     *   TRPO: 信任区域策略优化（2017/4/20 加利福尼亚大学）
         *   也是一种 Actor-Critic，通过限制最大步幅来更新策略，以解决步子太大不能收敛的问题
         *   依赖 KL-Divergence，来计算参数空间的变化距离

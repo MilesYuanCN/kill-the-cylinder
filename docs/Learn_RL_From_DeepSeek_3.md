@@ -1,5 +1,10 @@
-> 因为阶段二里面， 包含了一些阶段三的内容， 并且题干内容没那么多， 所以让其将阶段三和四合并到一起了
-> 
+# 跟着 DS 学习 RL（三）：PPO & GRPO
+
+友链：
+*   [跟着 DS 学习 ReinforcementLearning](./Learn_RL_From_DeepSeek_0.md)
+*   [跟着 DS 学习 RL（一）：核心概念](./Learn_RL_From_DeepSeek_1.md)
+*   [跟着 DS 学习 RL（二）：经典算法分类与基本算法](./Learn_RL_From_DeepSeek_2.md)
+
 > ### **合并阶段：策略梯度→PPO核心逻辑（关键路径）**
 > 
 > #### **Step 1：策略梯度核心问题（1小时）**
@@ -26,7 +31,7 @@
 >     *   **直观解释**：限制新策略与旧策略的动作概率比，防止突变
 > *   **对比动画理解**（重点！）：
 >     *   未裁剪的更新：策略可能大幅偏离导致崩溃  
->         ![PPO Clip机制](./跟着 DS 学习 RL（三）PPO & GRPO - 原禄城 - Confluence_files/ppo-clip.png)
+>         ![PPO Clip机制](./images/ppo-clip.png)
 > 
 > #### **Step 3：PPO实现关键（1-2小时）**
 > 
@@ -44,8 +49,7 @@
 >             optimizer.step()
 >     
 
-TRPO
-====
+## TRPO
 
 2017/4/20 加利福尼亚大学
 
@@ -85,8 +89,7 @@ Some facts：
 
   
 
-PPO：
-====
+## PPO
 
 *   论文：[PPO原始论文（重点读Section 3）](https://arxiv.org/abs/1707.06347)
 *   代码：[PPO伪代码解读](https://spinningup.openai.com/en/latest/algorithms/ppo.html)
@@ -111,9 +114,9 @@ Some Facts：
 *   可以用于离散或者连续的动作空间
 *   也支持 MPI 的并行化
 
-![](./跟着 DS 学习 RL（三）PPO & GRPO - 原禄城 - Confluence_files/image-2025-2-10_21-23-11.png)
+![](./images/image-2025-2-10_21-23-11.png)
 
-![](./跟着 DS 学习 RL（三）PPO & GRPO - 原禄城 - Confluence_files/image-2025-2-10_21-22-2.png)
+![](./images/image-2025-2-10_21-22-2.png)
 
 大概能懂这个方程含义： 
 
@@ -123,8 +126,7 @@ Some Facts：
     *   如果优势 < 0， 那它不能超过  1 - 3
 *   所以， 感觉就是限制更新率。
 
-GRPO
-====
+## GRPO
 
 [https://arxiv.org/abs/2402.03300](https://arxiv.org/abs/2402.03300)
 
@@ -147,7 +149,7 @@ Exploration and Analysis of Reinforcement Learning：
     *    RFT DPO PPO GRPPO 进行了对比。
     *   探讨了几种更有效的 reinforcement 大模型的方式。
 
-![](./跟着 DS 学习 RL（三）PPO & GRPO - 原禄城 - Confluence_files/image-2025-2-10_21-55-41.png)
+![](./images/image-2025-2-10_21-55-41.png)
 
 主要为了解决两个问题：
 
@@ -156,7 +158,7 @@ Exploration and Analysis of Reinforcement Learning：
 
 使用多个采样输出的平均奖励（基同一个问题）作为 baseline。 
 
-![](./跟着 DS 学习 RL（三）PPO & GRPO - 原禄城 - Confluence_files/image-2025-2-10_22-0-17.png)
+![](./images/image-2025-2-10_22-0-17.png)
 
 （没有读懂公式，  但大概知道在干什么）
 
