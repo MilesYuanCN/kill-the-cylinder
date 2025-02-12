@@ -50,7 +50,7 @@
 >     2.  **目标网络（Target Network）**：稳定训练
 >     3.  **神经网络拟合Q函数**：处理高维状态
 > *   **架构图**：  
->     ![DQN Architecture](./images/1_HMu8J2zHG-C6oVjYII-Eqg.png)
+>      (给了个不存在的 png)
 > *   **关键论文**：  
 >     [Nature DQN论文图表解读](https://www.nature.com/articles/nature14236/figures/1)（重点看图1）
 > 
