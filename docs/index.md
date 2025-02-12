@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Markdown Examples
-      link: /跟着 DS 学习 RL（一）核心概念.md
+      link: /Learn_RL_From_DeepSeek.md
     - theme: alt
       text: API Examples
       link: /api-examples
