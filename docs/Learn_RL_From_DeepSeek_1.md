@@ -93,7 +93,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
         )
         ```
 
-        *   > 这构建了一个多层感知器（MLP）网络，其两个尺寸为64的隐藏层和 ![](./images/c65796f3bb56c457e63ebc770e3d775cace08673.svg) 激活功能。如果`obs`是包含一批观测值的Numpy数组，则可以使用`pi_net`来获取一批动作，如下所示：
+        *   > 这构建了一个多层感知器（MLP）网络，其两个尺寸为64的隐藏层和 tanh 激活函数。如果`obs`是包含一批观测值的Numpy数组，则可以使用`pi_net`来获取一批动作，如下所示：
             > 
             > obs\_tensor \= torch.as\_tensor(obs, dtype\=torch.float32)
             > actions \= pi\_net(obs\_tensor)
@@ -108,7 +108,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
             *   暂时略过，有时间学习下
         *   两个重要的关键计算：
             *   sampling actions from the policy：从策略中抽样行动
-            *   computing log likelihoods of particular actions：计算特定动作的对数似然性![](./images/cc2095cba170e09137c55cb4f1786955b3174336.svg)
+            *   computing log likelihoods of particular actions：计算特定动作的对数似然性$log \pi_\theta(a|s)$
         *   疑问：对于连续的动作空间， 进行随机策略的流程是先将连续的动作空间变为离散的动作空间， 然后最大似然匹配吗？ （都不是，没深究 DS 回答）
             *   DS 回答...
                 
@@ -203,7 +203,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
                 2.  通过梯度优化直接关联动作概率与累积奖励；
                 3.  适用于需精细控制的复杂任务。
                 
-*   **<font color="red">Trajectories</font>**：![](./images/67a5412645decf6424bdd97aed3e9e7601bd784f.svg)     
+*   **<font color="red">Trajectories</font>**：$\tau$
     *   **翻译**：轨迹（或回合），也被称作 episodes or rollouts
     *   **解释**：
         *   交互过程中的状态、动作、奖励序列：( \\tau = (s\_0, a\_0, r\_0, s\_1, a\_1, r\_1, \\dots) )。
@@ -224,8 +224,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
         *   **平均奖励**：长期每步的平均奖励（用于无限时域任务）
     *   内容：
         *   有的写做 $R$，有的写做 $G$
-        *   有的写做 R， 有的写做 G 
-        *   奖励 ![R](./images/1f9d30d011e9fe548e999c9bfcf3fccfa27ec3ff.svg) 在加强学习中至关重要， 其由前状态，刚刚采取的行动以及世界的下一个状态定义：  
+        *   奖励 $R$ 在加强学习中至关重要， 其由前状态，刚刚采取的行动以及世界的下一个状态定义：  
             *   ![](./images/image-2025-2-7_20-32-17.png)
             *   常常简化为更少的依赖：![](./images/image-2025-2-7_20-33-11.png)![](./images/image-2025-2-7_20-33-15.png)
         *   Agent 的目的是最大化轨迹上的某些部分的累计 reward：![](./images/image-2025-2-7_20-36-47.png)

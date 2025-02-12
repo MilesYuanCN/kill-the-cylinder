@@ -116,8 +116,7 @@
 > 
 > *   **Actor**：策略网络 $\pi_\theta(a|s)$ → 生成动作
 > *   **Critic**：价值网络 $V_\phi(s)$ 或 $Q_\phi(s,a)$ → 评估动作
-> *   **结构示意图**：  
->     ![Actor-Critic](./images/3707a5c06fe28b0c2660e70c46cce5bfd84dac90.svg)
+> *   **结构示意图**： （给了个不存在的 svg）
 > 
 > #### **2\. 优势函数（Advantage）**
 > 
