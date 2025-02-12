@@ -65,14 +65,14 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
     *   **翻译**：策略
     *   **解释**：
         *   智能体选择动作的规则，映射状态到动作。
-        *   **Deterministic Policies 确定性策略**：直接输出明确动作（如检测障碍物时刹车），通常 ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/123eb57279cfbea38a65e8e129bda64972fedc3d.svg) 描述。  
-            ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-19-36.png)
+        *   **Deterministic Policies 确定性策略**：直接输出明确动作（如检测障碍物时刹车），通常 ![](./images/123eb57279cfbea38a65e8e129bda64972fedc3d.svg) 描述。  
+            ![](./images/image-2025-2-7_19-19-36.png)
         *   **Stochastic Policies 随机策略**：输出动作概率分布（如探索时随机尝试），通常 π 描述。  
-            ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-19-45.png)
+            ![](./images/image-2025-2-7_19-19-45.png)
     *   其他：
         *   策略本质是 Agent 的大脑，有些称呼会将 Proxy 代替 Agent 。
         *   RL 中， 可以通过使用参数「比如神经网络的 weight 和 bias」来描述策略。
-        *    ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/ce5edddd490112350f4bd555d9390e0e845f754a.svg) 或者 ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/3b22abcadf8773922f8db80011611bad8123a783.svg) ，然后将其作为策略符号上的下标写
+        *    ![](./images/ce5edddd490112350f4bd555d9390e0e845f754a.svg) 或者 ![](./images/3b22abcadf8773922f8db80011611bad8123a783.svg) ，然后将其作为策略符号上的下标写
     *   确定性策略
         *   [?](https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=801826870#)
             
@@ -92,7 +92,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
             
                         `)`
             
-        *   > 这构建了一个多层感知器（MLP）网络，其两个尺寸为64的隐藏层和 ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/c65796f3bb56c457e63ebc770e3d775cace08673.svg) 激活功能。如果`obs`是包含一批观测值的Numpy数组，则可以使用`pi_net`来获取一批动作，如下所示：
+        *   > 这构建了一个多层感知器（MLP）网络，其两个尺寸为64的隐藏层和 ![](./images/c65796f3bb56c457e63ebc770e3d775cace08673.svg) 激活功能。如果`obs`是包含一批观测值的Numpy数组，则可以使用`pi_net`来获取一批动作，如下所示：
             > 
             > obs\_tensor \= torch.as\_tensor(obs, dtype\=torch.float32)
             > actions \= pi\_net(obs\_tensor)
@@ -107,7 +107,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
             *   暂时略过，有时间学习下 [原禄城](https://confluence.zhenguanyu.com/display/~yuanlucheng)
         *   两个重要的关键计算：
             *   sampling actions from the policy：从策略中抽样行动
-            *   computing log likelihoods of particular actions：计算特定动作的对数似然性![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/cc2095cba170e09137c55cb4f1786955b3174336.svg)
+            *   computing log likelihoods of particular actions：计算特定动作的对数似然性![](./images/cc2095cba170e09137c55cb4f1786955b3174336.svg)
         *   疑问：对于连续的动作空间， 进行随机策略的流程是先将连续的动作空间变为离散的动作空间， 然后最大似然匹配吗？ （都不是，没深究 DS 回答）
             *   DS 回答...
                 
@@ -218,19 +218,25 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
                 2.  通过梯度优化直接关联动作概率与累积奖励；
                 3.  适用于需精细控制的复杂任务。
                 
-*   **Trajectories：![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/67a5412645decf6424bdd97aed3e9e7601bd784f.svg)** 
+*   **Trajectories：![](./images/67a5412645decf6424bdd97aed3e9e7601bd784f.svg)** 
+*   {% asset_img 67a5412645decf6424bdd97aed3e9e7601bd784f.svg %}
+*   {% asset_img ./images/67a5412645decf6424bdd97aed3e9e7601bd784f.svg %}
+*   {% asset_img /img/67a5412645decf6424bdd97aed3e9e7601bd784f.svg %}
     
     *   **翻译**：轨迹（或回合），也被称作 episodes or rollouts
     *   **解释**：
         *   交互过程中的状态、动作、奖励序列：( \\tau = (s\_0, a\_0, r\_0, s\_1, a\_1, r\_1, \\dots) )。
-            *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-51-11.png)
+            *   ![](./images/image-2025-2-7_19-51-11.png)
+            *   {% asset_img image-2025-2-7_19-51-11.png %}
+            *   {% asset_img ./images/image-2025-2-7_19-51-11.png %}
+            *   {% asset_img /img/image-2025-2-7_19-51-11.png %}
         *   **用途**：评估策略或训练模型（如蒙特卡洛方法）。
     *   流程：
         *   第一个状态 s0，从起始状态分布中所集采样：
-            *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-51-52.png)
+            *   ![](./images/image-2025-2-7_19-51-52.png)
         *   根据 natural laws of the environment，计算出来 st+1
-            *   确定性的：![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-52-57.png)
-            *   随机的：![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_19-53-6.png)
+            *   确定性的：![](./images/image-2025-2-7_19-52-57.png)
+            *   随机的：![](./images/image-2025-2-7_19-53-6.png)
 *   **Return And Different Formulations of Return**
     
     *   **翻译**：回报的不同定义形式
@@ -240,15 +246,15 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
         *   **平均奖励**：长期每步的平均奖励（用于无限时域任务）。
     *   内容：
         *   有的写做 R， 有的写做 G 
-        *   奖励 ![R](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/1f9d30d011e9fe548e999c9bfcf3fccfa27ec3ff.svg) 在加强学习中至关重要， 其由前状态，刚刚采取的行动以及世界的下一个状态定义：  
-            *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-32-17.png)
-            *   常常简化为更少的依赖：![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-33-11.png)![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-33-15.png)
-        *   Agent 的目的是最大化轨迹上的某些部分的累计 reward：![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-36-47.png)
+        *   奖励 ![R](./images/1f9d30d011e9fe548e999c9bfcf3fccfa27ec3ff.svg) 在加强学习中至关重要， 其由前状态，刚刚采取的行动以及世界的下一个状态定义：  
+            *   ![](./images/image-2025-2-7_20-32-17.png)
+            *   常常简化为更少的依赖：![](./images/image-2025-2-7_20-33-11.png)![](./images/image-2025-2-7_20-33-15.png)
+        *   Agent 的目的是最大化轨迹上的某些部分的累计 reward：![](./images/image-2025-2-7_20-36-47.png)
         *   **finite-horizon undiscounted return：有限时域无折扣回报**
-            *   **![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-37-42.png)**
+            *   **![](./images/image-2025-2-7_20-37-42.png)**
             *   **最大化有限窗口中的 reward 之和**
         *   **infinite-horizon discounted return：无限时域有折扣回报**
-            *   **![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-38-47.png)**
+            *   **![](./images/image-2025-2-7_20-38-47.png)**
             *   **最大化加权的 reward 之和（加权主要为的是收敛，方便助学中的处理）**
 *   **The RL Optimization Problem**
     
@@ -260,12 +266,12 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
     *   内容：
         *   不论 Policy 和 Return 是什么方式， Agent 的目的就是优化 Policy 中的参数， 使得 Return 最大化。
         *   假设 Policy 和 Return 都是 stochastic 随机的，T-Step 轨迹为：  
-            ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-45-10.png)  
+            ![](./images/image-2025-2-7_20-45-10.png)  
             （这种公式都有点忘了， 看起来 | 区分了变量和值）
         *   回报：
-            *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-48-22.png)
+            *   ![](./images/image-2025-2-7_20-48-22.png)
         *   则最优政策：
-            *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-48-54.png)
+            *   ![](./images/image-2025-2-7_20-48-54.png)
             *   变为找到最大化累积回报时的 π
 *   **Value Functions**
     
@@ -282,26 +288,26 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
         *   基本上所有的 RL algorithm 都含有值函数
         *   几种主要价值函数：（文档解释不清楚， 让 ds 补充了下）
             *   On-Policy Value Function（同策略状态价值函数）：
-                *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-59-40.png)
+                *   ![](./images/image-2025-2-7_20-59-40.png)
                 *   一直遵循 π， 得到的最终 Return
                 *   **应用场景**：
                     *   **策略评估（Policy Evaluation）**：计算当前策略的性能（如动态规划中的迭代策略评估）。
                     *   **基于状态的策略改进**：通过比较不同策略的 ( V^\\pi(s) ) 选择更优策略。
             *   On-Policy Action-Value Function（同策略动作价值函数）
-                *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-59-51.png)
+                *   ![](./images/image-2025-2-7_20-59-51.png)
                 *   第一次行为是 a（而不是 π 策略预计的）， 最终的 Return
                 *   **应用场景**：
                     *   **策略改进（Policy Improvement）**：通过选择使 ( Q^\\pi(s, a) ) 最大的动作来优化策略（如策略迭代）。
                     *   **基于动作的探索**：指导智能体在特定状态下尝试高价值动作（如 (\\epsilon)-贪婪策略）。
             *   Optimal Value Function（最优状态价值函数）
-                *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-59-57.png)
+                *   ![](./images/image-2025-2-7_20-59-57.png)
                 *   理论最优性能， 与具体策略无关
                 *   **应用场景**：
                     *   > **理论分析**：作为强化学习问题的全局最优解基准。
                         
                     *   **值迭代（Value Iteration）**：直接逼近 ( V^\* ) 以导出最优策略。
             *   Optimal Action-Value Function（最优动作价值函数）
-                *   ![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-0-5.png)
+                *   ![](./images/image-2025-2-7_21-0-5.png)
                 *   添加了个第一个 action a
                 *   **应用场景**：
                     *   **Q-learning**：直接学习 ( Q^\* ) 以绕过显式策略（如无模型强化学习）。
@@ -313,7 +319,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
 
 所有， 其他条件都有的时候， 最优的行为就能确认了，为：最大化最有价值函数的 a 。
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-28-26.png)
+![](./images/image-2025-2-7_21-28-26.png)
 
   
 
@@ -332,13 +338,13 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
 
 对于 on-policy（同策略）
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-29-18.png)
+![](./images/image-2025-2-7_21-29-18.png)
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-33-0.png)
+![](./images/image-2025-2-7_21-33-0.png)
 
 这里有点难懂了， 看下是如何演变的
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_20-59-40(1).png)
+![](./images/image-2025-2-7_20-59-40(1).png)
 
 对于同策略状态价值函数：一直执行同策略， 最终计算出来的 R 的积分。按照上面的动态规划就是
 
@@ -348,7 +354,7 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
 
 所以对于最优的两个价值函数也是同理
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-40-16.png)
+![](./images/image-2025-2-7_21-40-16.png)
 
 bellman 方程证明了一个事实：
 
@@ -362,7 +368,7 @@ bellman 方程证明了一个事实：
 
 我们通过 advantage funtion 来量化这个相对优势
 
-![](./跟着 DS 学习 RL（一）核心概念 - 原禄城 - Confluence_files/image-2025-2-7_21-44-5.png)
+![](./images/image-2025-2-7_21-44-5.png)
 
 其实就是同策略的对应行动价值 - 同策略状态价值
 
