@@ -5,11 +5,6 @@ export default defineConfig({
   title: "Kill-The-Cylinder",
   description: "Kill-The-Cylinder",
   
-  // 添加首页重定向
-  rewrites: {
-    'Learn_RL_From_DeepSeek_0.md': 'index.md'
-  },
-
   head: [
     ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css' }],
     ['script', { defer: 'true', src: 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js' }],
