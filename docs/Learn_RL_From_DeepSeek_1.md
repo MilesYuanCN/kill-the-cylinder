@@ -73,14 +73,14 @@ RL 是对代理（Agent）的研究以及它们如何通过反复试验学习，
     *   **翻译**：策略
     *   **解释**：
         *   智能体选择动作的规则，映射状态到动作。
-        *   **Deterministic Policies 确定性策略**：直接输出明确动作（如检测障碍物时刹车），通常 ![](./images/123eb57279cfbea38a65e8e129bda64972fedc3d.svg) 描述。  
+        *   **Deterministic Policies 确定性策略**：直接输出明确动作（如检测障碍物时刹车），通常 μ 描述。  
             ![](./images/image-2025-2-7_19-19-36.png)
         *   **Stochastic Policies 随机策略**：输出动作概率分布（如探索时随机尝试），通常 π 描述。  
             ![](./images/image-2025-2-7_19-19-45.png)
     *   其他：
         *   策略本质是 Agent 的大脑，有些称呼会将 Proxy 代替 Agent 。
         *   RL 中， 可以通过使用参数「比如神经网络的 weight 和 bias」来描述策略。
-        *    ![](./images/ce5edddd490112350f4bd555d9390e0e845f754a.svg) 或者 ![](./images/3b22abcadf8773922f8db80011611bad8123a783.svg) ，然后将其作为策略符号上的下标写
+        *   θ 或者 φ，然后将其作为策略符号上的下标写，表示这些参数化的策略
     *   确定性策略
         ```
         # torch.nn软件包的Pytorch中连续动作空间构建简单确定性策略的代码段：
