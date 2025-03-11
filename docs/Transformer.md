@@ -65,7 +65,7 @@ Thinking...
 # [李宏毅-Transformer详解](https://www.bilibili.com/video/BV1J441137V6)
 Bert 是 Unsupervised Trained 的 Transformer
 Seq2seq model with "self-attention"
-![alt text](image.png)
+![alt text](./images/image.png)
 Self-attention 是个 layer。
 RNN：循环神经网络
 - 每个 output 都需要依赖所有 input
@@ -82,13 +82,13 @@ Self-attention Layer
 - 可以并行
 - 可以取代 RNN
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 Self-attention 流程：
 - 拿每个 q 对每个 k 做 attention（q 点乘 k）得到 alpha 
 - 对 attention score 做 softmax，得到 ^alpha
-  - ![alt text](image-2.png)
+  - ![alt text](./images/image-2.png)
 - 拿 ^alpha 对 v 做加权，得到 output
-  - ![alt text](image-3.png)
+  - ![alt text](./images/image-3.png)
 
 从上面最后一个图可以看出：
 - b1 考虑了所有 input 的 a1, a2, a3, a4
@@ -96,18 +96,18 @@ Self-attention 流程：
 为什么这个东西有助于矩阵运算
 - 对于输入， a1, a2, a3, a4 是输入的向量
 - 可以三次矩阵运算就计算出 q k v（都是向量）
-  - ![alt text](image-4.png)
+  - ![alt text](./images/image-4.png)
 - 之后处理 q 和 k 的点乘， 可以一次矩阵运算就计算出 
-  - ![alt text](image-8.png)
-  - ![alt text](image-9.png)
+  - ![alt text](./images/image-8.png)
+  - ![alt text](./images/image-9.png)
 - 之后的 softmax 和 v 的点乘， 可以一次矩阵运算就计算出 b1
 - 总结
-  - ![alt text](image-10.png)
+  - ![alt text](./images/image-10.png)
 
 
 ### Multi-head Self-attention
 - 把 input 切成多段，每段分别做 self-attention（即仅对于 a1 也有多个 q, k, v）
-  - ![alt text](image-11.png)
+  - ![alt text](./images/image-11.png)
 - 最后获取到多个 b1, b2, b3, b4，将其通过一个矩阵运算，得到最终的 output
 - 目的是：
   - 让模型捕捉到更多不同类型的特征
@@ -118,7 +118,7 @@ Self-attention 流程：
 - 常常使用 pi 来表示位置信息， 其是一个向量， 其维度与 input 的维度相同，为一个 one-hot 向量
 - 一般在运算中， 会将 pi 和 input 相加， 然后进行运算
 - Wp 为手设的矩阵
-  ![alt text](image-12.png)
+  ![alt text](./images/image-12.png)
 
 
 ## 如何将 Self-attention 应用到 Seq2seq model 中
@@ -131,7 +131,7 @@ Seq2seq model 的输入是序列，输出是序列
 使用 Transformer 来实现 Seq2seq model 时， 需要将 Encoder 和 Decoder 都使用 Transformer（self-attention）来实现
 
 ## 看一下经典 Transformer 的结构
-![alt text](image-13.png)
+![alt text](./images/image-13.png)
 - Encoder
   - Inputs 的 Embedding Layer 变成了 Vector
   - 加上 positional encoding
@@ -165,7 +165,7 @@ Seq2seq model 的输入是序列，输出是序列
 - 例如这个句子：
   - “The animal didn't cross the street because it was too tired”
   - 这个句子中， “it” 指代的是动物
-  - ![alt text](image-16.png)
+  - ![alt text](./images/image-16.png)
   - 这个关联度反应与 attention score 上， 上面我们提到， 其是 q 点乘 k 得到的一个维度为 1 的向量
 - 在 tired 换为 wide 后， it 和 street 之间的关联度就会变得比较大。
 - 这也是 Attention 更容易让人理解的原因
@@ -215,10 +215,10 @@ https://jalammar.github.io/illustrated-transformer/
 前面的知识都还一致， 从 Bringing The Tensors Into The Picture 开始
 
 - 每个单词都被 embedding 到 512 维的向量中
-![alt text](image-14.png)
+![alt text](./images/image-14.png)
   - 即 a1 a2 a3 这些 inputs, 由不同的 embedding 担任
 - 之后每个单词都会流经编码器的两层中的每一层
-  - ![alt text](image-15.png)
+  - ![alt text](./images/image-15.png)
   - 在 self-attention 中， 这些路径存在依赖关系
   - 在 feed-forward 中， 这些路径是独立的
 - self-attention at a high level
@@ -243,15 +243,15 @@ https://jalammar.github.io/illustrated-transformer/
   - 在上面的例子中， The animal didn't cross the street because it was too tired 这句话中， 不同的头， 考虑了不同的内容
   - 比如第一个头， 考虑了 it 和 animal 的关系， 第二个头， 考虑了 it 和 tired 的关系
   - 多了就不好理解了，但是比如说 it， 和 street 的关系就是不大， 在多个头里面， 可能就只有少数的头考虑了 it 和 street 的关系
-    - ![alt text](image-18.png)
+    - ![alt text](./images/image-18.png)
 
 ## Representing The Order of The Sequence Using Positional Encoding
 - 上面一直没说位置信息， 我也一直没理解湾湾老师说的位置信息的价值在哪。
 - Transformer 对于 x 进行了额外处理， 给每个 x 都加了一个位置信息，得到了新的 x1
-  ![alt text](image-19.png)
+  ![alt text](./images/image-19.png)
 - 注意， 这个是按位 +， 不改变 x 的维度。
 - 加上的东西也比较神奇， 给它 plot 以下是这样的东西
-  - ![alt text](image-20.png)
+  - ![alt text](./images/image-20.png)
 
 
 ## Add & Norm
@@ -261,7 +261,7 @@ https://jalammar.github.io/illustrated-transformer/
   - 对于此处的 W0 来说， 其的初始变量是随机初始化的， 在训练过程中， 通过反向传播来更新 W0
   - W0 主要为了融合多个头关注的不同空间的信息， 其也是训练出来的。
 - 所以输入到 feed-forward 的实际上是 b1 + x1，还进行了一个 layer normalization
-  - ![alt text](image-21.png)
+  - ![alt text](./images/image-21.png)
   - 对于每个向量进行 layer normalization， 使得平均值为 0， 方差为 1
     - 减缓梯度消失/爆炸
     - 加速收敛
@@ -277,12 +277,12 @@ https://jalammar.github.io/illustrated-transformer/
 
 ## 解码器端
 编码器最终输出了一组注意向量 k v， 这些向量会被送到解码器的每个位置上
-![alt text](image-22.png)
+![alt text](./images/image-22.png)
 
 对于每个解码器来说， 其包含三个 sub-layer：
 - masked multi-head self-attention
   - 通过 masked 来防止解码器看到未来的信息
-  - ![alt text](image-23.png)
+  - ![alt text](./images/image-23.png)
   - 意味着， 即便是已经有了多个输出， 第一个输出， 其也看不到后面的输出
 - multi-head cross-attention
   - 用解码器自己的 q 对编码器的 k v 进行 attention
@@ -316,13 +316,13 @@ Linear Layer 是一个全连接层， 其目的是将解码器产生的向量投
 
 ## 问题
 - 不同的头， 考虑了不同的内容， 但是因为他们都是随机的， 会有几个头考虑的空间是相同的吗？
-  - ![alt text](image-17.png)
+  - ![alt text](./images/image-17.png)
   - （用 cursor 做笔记是真的舒服， 这里也豁然开朗了， 不知道后面所说的剪枝是不是也是这个意思）
 - 对 feedforward 不太懂
   - 其每个输出会与所有的输入相关联。
 - 解码器的输入矩阵大小是不断变化的吗？
   - 是不断变化的， 因为其需要考虑已经输出的内容
-  - 一开始是 <start>， 之后是 <start> <translate>， 最后是 <start> <translate> <to> <english> <end>
+  - 一开始是 [start]， 之后是 [start] [translate]， 最后是 [start] [translate] [to] [english] [end]
   - 这也会使得解码器输出的越多， 下一个单词的输入矩阵越大， 计算量越大的情况。
   
 
